@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik Player - Sandra Lukic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="player-container">
+        <!-- Header -->
+        <header class="player-header">
+            <button class="back-btn" onclick="window.close()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Music Player</h1>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </header>
+
+        <!-- Visualizer -->
+        <div class="visualizer-container">
+            <canvas id="visualizer"></canvas>
+            <div class="album-art" id="albumArt">
+                <i class="fas fa-music"></i>
+            </div>
+        </div>
+
+        <!-- Song Info -->
+        <div class="song-info">
+            <h2 id="songTitle">Wähle einen Song</h2>
+            <p id="artistName">Keine Musik geladen</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <span class="time" id="currentTime">0:00</span>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+                <div class="progress-dot"></div>
+            </div>
+            <span class="time" id="duration">0:00</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="control-btn" id="shuffleBtn" title="Zufällige Wiedergabe">
+                <i class="fas fa-random"></i>
+            </button>
+            <button class="control-btn" id="prevBtn" title="Vorheriger Song">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="control-btn main-btn" id="playPauseBtn" title="Play/Pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="nextBtn" title="Nächster Song">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <button class="control-btn" id="repeatBtn" title="Wiederholen">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+
+        <!-- Volume Control -->
+        <div class="volume-control">
+            <button class="volume-btn" id="volumeBtn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <input type="range" id="volumeSlider" min="0" max="100" value="70">
+        </div>
+
+        <!-- Playlist -->
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <h3>Playlist</h3>
+                <div class="playlist-controls">
+                    <button class="save-btn" id="savePlaylistBtn" title="Playlist speichern">
+                        <i class="fas fa-save"></i>
+                    </button>
+                    <button class="load-btn" id="loadPlaylistBtn" title="Playlist laden">
+                        <i class="fas fa-folder-open"></i>
+                    </button>
+                    <button class="add-btn" id="addSongBtn">
+                        <i class="fas fa-plus"></i> Musik hinzufügen
+                    </button>
+                </div>
+            </div>
+            <div class="playlist" id="playlist">
+                <!-- Demo Songs -->
+                <div class="playlist-item" data-src="demo1.mp3" data-title="Sommermelodie" data-artist="Demo Artist 1">
+                    <div class="item-info">
+                        <span class="item-number">1</span>
+                        <div class="item-details">
+                            <h4>Sommermelodie</h4>
+                            <p>Demo Artist 1</p>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <span class="item-duration">3:45</span>
+                        <button class="delete-btn" title="Entfernen">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="playlist-item" data-src="demo2.mp3" data-title="Nachthimmel" data-artist="Demo Artist 2">
+                    <div class="item-info">
+                        <span class="item-number">2</span>
+                        <div class="item-details">
+                            <h4>Nachthimmel</h4>
+                            <p>Demo Artist 2</p>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <span class="item-duration">4:12</span>
+                        <button class="delete-btn" title="Entfernen">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="playlist-item" data-src="demo3.mp3" data-title="Elektronische Träume" data-artist="Demo Artist 3">
+                    <div class="item-info">
+                        <span class="item-number">3</span>
+                        <div class="item-details">
+                            <h4>Elektronische Träume</h4>
+                            <p>Demo Artist 3</p>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <span class="item-duration">5:30</span>
+                        <button class="delete-btn" title="Entfernen">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizer Mode Selector -->
+        <div class="visualizer-modes">
+            <button class="mode-btn active" data-mode="bars">Balken</button>
+            <button class="mode-btn" data-mode="wave">Welle</button>
+            <button class="mode-btn" data-mode="circle">Kreis</button>
+        </div>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="fileInput" accept="audio/*" multiple style="display: none;">
+
+    <!-- Audio Element -->
+    <audio id="audioPlayer"></audio>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
